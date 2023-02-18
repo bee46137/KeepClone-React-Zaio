@@ -6,14 +6,14 @@ import Notes from "./components/Notes/Notes";
 import Modal from "./components/Modal/Modal";
 
 
-const NOTES = [
+// const NOTES = [
 
-];
+// ];
 
 function App() {
 
 
-  const [notes, setNotes] = useState(NOTES);
+  const [notes, setNotes] = useState([]);
 
   const addNote = (note) => {
     if (note.text !== "")

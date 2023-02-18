@@ -1,0 +1,94 @@
+/*  TOP NAV BAR STYLING  */
+/* GENERAL NAV BAR STYLING */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 64px;
+    padding: 8px;
+    color: #767676;
+    border-bottom: 1px solid #dadce0;
+}
+
+.material-symbols-outlined {
+    padding: 12px;
+}
+
+.hover:hover {
+    background: #f1f3f4;
+    color: black;
+    border-radius: 50%;
+    cursor: pointer;
+    
+}
+
+
+
+/* LOGO AREA STYLING (TOP RIGHT) */
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo .gb_Ec {
+    padding-left: 4px;
+}
+
+.logo-text {
+    font-size: 1.4rem;
+    padding-left: 4px;
+}
+
+/* SEARCH BAR STYLING */
+
+.search-area span {
+    margin-left: 10px;
+}
+
+.search-area {
+    display: flex;
+    align-items: center;
+    background: #f1f3f4;
+    height: 46px;
+    width: 524px;
+    border-radius: 8px 8px;
+}
+
+.search-area input {
+    justify-content: center;
+    border: none;
+    Height:100%;
+    width: 80%;
+    background: #f1f3f4;
+    font-size: 1rem;
+    margin-left: 5px;
+}
+
+/* SETTING STYLING */
+
+.settings{
+    display: flex;
+}
+
+/* PROFILE ACTIONS STYLING */
+
+
+.profile-actions {
+    display: flex;
+}
+
+/* AUTH STYLES */
+
+.auth-user {
+    cursor: pointer;
+}

@@ -2,7 +2,8 @@ import "./Notes.css";
 import Note from "./Note";
 
 const Notes = (props) => {
-  const { notes, archiveNote } = props;
+  
+  const { notes, archiveNote, toggleModal, setSelectedNote} = props;
   
 
   return (
@@ -38,10 +39,10 @@ const Notes = (props) => {
         notes.map((note, index) => (
           <Note
             key={index}
-            id={note.id}
-            title={note.title}
-            text={note.text}
+            note = {note}
             archiveNote={archiveNote}
+            toggleModal = {toggleModal}
+            setSelectedNote ={setSelectedNote}
           />
         )))
         }

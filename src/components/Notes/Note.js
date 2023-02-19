@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 
 const Note = (props) => {
-  const [title, setTitle] = useState(props.title)
-  const [text, setText] = useState(props.text)
-  const id = props.id;
- 
 
+  const { toggleModal, note, setSelectedNote} = props;
+
+  const [title, setTitle] = useState (note.title);
+  const [text, setText] = useState (note.text);
   const [isHover, setIsHover] = useState(false);
+
+  const noteClickHandler = ()=> {
+    toggleModal();
+    setSelectedNote(note);
+  }
 
   const handleMouseEnter = () => {
     setIsHover(true);
@@ -17,15 +22,16 @@ const Note = (props) => {
 
   const handleArchiveNote = () => {
     console.log("ARCHIVE");
-    props.archiveNote(props.id)
+    props.archiveNote(note.id)
   }
 
   return (
     <div
       className="note"
-      id={id}
+      id={note.id}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick = {noteClickHandler}
     >
       {isHover && (
         <span className="material-symbols-outlined check-circle">

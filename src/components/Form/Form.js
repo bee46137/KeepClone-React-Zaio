@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { uid } from 'uid';
 import "./Form.css";
 
 const Form = (props) => {
@@ -35,9 +36,10 @@ const Form = (props) => {
   // USESTATE OTHER WAY
   // VARIABLES & FUNCTIONS BELOW
 
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [isActiveForm, setIsActiveForm] = useState(false);
+  const { edit, selectedNote, toggleModal } = props;
+  const [title, setTitle] = useState(edit && selectedNote.title || "");
+  const [text, setText] = useState(edit && selectedNote.text || "");
+  const [isActiveForm, setIsActiveForm] = useState(edit);
 
   const titleChangeHandler = (event) => {
     setTitle(event.target.value);
@@ -52,19 +54,24 @@ const Form = (props) => {
   const submitFormHandler = (event) => {
     event.preventDefault();
 
-    // add data to array
+    if (!edit){
 
-    const note = {
-      id: Math.random(),
-      title,
-      text,
-    };
+       const note = {
+        id: uid(),
+        title,
+        text,
+      };
 
-    props.addNote(note);
-    console.log(note);
-    setTitle("");
-    setText("");
-    setIsActiveForm(false)
+      props.addNote(note);
+      console.log(note);
+      
+      setIsActiveForm(false)
+    } else {
+      toggleModal();
+    }
+
+   setTitle("");
+   setText("");
   };
 
   const formClickHandler = () => {
@@ -75,12 +82,11 @@ const Form = (props) => {
   return (
     <div>
       <div className="form-container active-form" onClick={formClickHandler}>
-        <form onSubmit={submitFormHandler} className={isActiveForm ? "form" : ""} id="form" action="">
+        <form onSubmit={submitFormHandler} className={isActiveForm ? "form" : ""} action="">
           {isActiveForm && (
             <input
               onChange={titleChangeHandler}
               value={title}
-              id="note-title"
               className="note-title"
               placeholder="Title"
               type="text"
@@ -90,7 +96,6 @@ const Form = (props) => {
           <input
             onChange={textChangeHandler}
             value={text}
-            id="note-text"
             className="note-text"
             placeholder="Take a note..."
             type="text"

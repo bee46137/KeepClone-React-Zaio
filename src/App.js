@@ -14,6 +14,9 @@ function App() {
 
 
   const [notes, setNotes] = useState([]);
+  const [selectedNote, setSelectedNote] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const addNote = (note) => {
     if (note.text !== "")
@@ -26,18 +29,23 @@ function App() {
 
   const archiveNote = (id) => {
     setNotes((prevNotes) => {
-      prevNotes.filter (note => note.id !== id)
+      return prevNotes.filter (note => note.id !== id)
     })
-  
   };
+
+  const toggleModal =() => {
+    setIsModalOpen ((prevModal) => {
+      return !prevModal;
+    })
+  }
 
   return (
     <div>
       <Navbar />
       <Sidebar />
       <Form addNote={addNote} />
-      <Notes notes={notes} archiveNote={archiveNote} />
-      <Modal />
+      <Notes notes={notes} archiveNote={archiveNote} toggleModal = {toggleModal} setSelectedNote = {setSelectedNote}/>
+      { isModalOpen && <Modal isModalOpen={isModalOpen} selectedNote = {selectedNote} toggleModal = {toggleModal} /> }
     </div>
   );
 }

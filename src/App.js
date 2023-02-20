@@ -24,8 +24,24 @@ function App() {
         return [...prevNotes, note];
       });
 
-    console.log(notes);
   };
+
+  const editNote = (editedNote) => {
+    setNotes((prevNotes) => {
+      const newArray = prevNotes.map (note => {
+            
+            if (editedNote.id === note.id) {
+              note.title = editedNote.title
+              note.text = editedNote.text
+            }
+            
+            return note;
+    })
+    return newArray;
+    
+    })
+    
+  }
 
   const archiveNote = (id) => {
     setNotes((prevNotes) => {
@@ -33,7 +49,7 @@ function App() {
     })
   };
 
-  const toggleModal =() => {
+  const toggleModal = () => {
     setIsModalOpen ((prevModal) => {
       return !prevModal;
     })
@@ -43,9 +59,9 @@ function App() {
     <div>
       <Navbar />
       <Sidebar />
-      <Form addNote={addNote} />
+      <Form addNote={addNote} editNote = {editNote}/>
       <Notes notes={notes} archiveNote={archiveNote} toggleModal = {toggleModal} setSelectedNote = {setSelectedNote}/>
-      { isModalOpen && <Modal isModalOpen={isModalOpen} selectedNote = {selectedNote} toggleModal = {toggleModal} /> }
+      { isModalOpen && <Modal isModalOpen={isModalOpen} selectedNote = {selectedNote} toggleModal = {toggleModal} editNote = {editNote}/> }
     </div>
   );
 }

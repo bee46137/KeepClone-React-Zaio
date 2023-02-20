@@ -4,8 +4,6 @@ const Note = (props) => {
 
   const { toggleModal, note, setSelectedNote} = props;
 
-  const [title, setTitle] = useState (note.title);
-  const [text, setText] = useState (note.text);
   const [isHover, setIsHover] = useState(false);
 
   const noteClickHandler = ()=> {
@@ -13,16 +11,11 @@ const Note = (props) => {
     setSelectedNote(note);
   }
 
-  const handleMouseEnter = () => {
-    setIsHover(true);
-  };
-  const handleMouseLeave = () => {
-    setIsHover(false);
-  };
+  const handleMouseEnter = () => setIsHover(true);
+  const handleMouseLeave = () => setIsHover(false);
 
   const handleArchiveNote = () => {
-    console.log("ARCHIVE");
-    props.archiveNote(note.id)
+    props.archiveNote(note.id);
   }
 
   return (
@@ -39,8 +32,8 @@ const Note = (props) => {
         </span>
       )}
 
-      <div className="title-note">{title}</div>
-      <div className="text-note">{text}</div>
+      <div className="title-note">{note.title}</div>
+      <div className="text-note">{note.text}</div>
 
       {isHover && (
         <div className="footer-note">

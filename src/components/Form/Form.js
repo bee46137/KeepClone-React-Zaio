@@ -36,9 +36,9 @@ const Form = (props) => {
   // USESTATE OTHER WAY
   // VARIABLES & FUNCTIONS BELOW
 
-  const { edit, selectedNote, toggleModal } = props;
-  const [title, setTitle] = useState(edit && selectedNote.title || "");
-  const [text, setText] = useState(edit && selectedNote.text || "");
+  const { edit, selectedNote, toggleModal, editNote } = props;
+  const [title, setTitle] = useState((edit && selectedNote.title) || "");
+  const [text, setText] = useState((edit && selectedNote.text) || "");
   const [isActiveForm, setIsActiveForm] = useState(edit);
 
   const titleChangeHandler = (event) => {
@@ -52,26 +52,31 @@ const Form = (props) => {
   }
 
   const submitFormHandler = (event) => {
-    event.preventDefault();
+      event.preventDefault();
 
-    if (!edit){
+      if (!edit){
 
-       const note = {
-        id: uid(),
-        title,
-        text,
-      };
+        props.addNote({
+          id: uid(),
+          title,
+          text,
+        });
+        
+        setIsActiveForm(false)
 
-      props.addNote(note);
-      console.log(note);
-      
-      setIsActiveForm(false)
-    } else {
-      toggleModal();
-    }
+      } else {
 
-   setTitle("");
-   setText("");
+        editNote({
+          id: selectedNote.id,
+          title,
+          text
+        });
+        toggleModal();
+        
+      }
+
+    setTitle("");
+    setText("");
   };
 
   const formClickHandler = () => {
